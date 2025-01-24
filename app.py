@@ -9,12 +9,13 @@ def progress_callback(stream, chunk, bytes_remaining):
     global pbar
     pbar.update(len(chunk))
 
-def download_video(url):
+def download_video():
     try:
         save_path = os.path.join(os.getcwd(), "videos")
         if not os.path.exists(save_path):
             os.makedirs(save_path)
-        yt = YouTube(url, on_progress_callback=progress_callback)
+        video_url = input(Fore.BLUE + "Enter the YouTube video URL: ")
+        yt = YouTube(video_url, on_progress_callback=progress_callback)
         print(Fore.CYAN + f"Title: {yt.title}")
         print(Fore.CYAN + f"Views: {yt.views}")
         print(Fore.CYAN + f"Duration: {yt.length} seconds")
@@ -35,6 +36,4 @@ def download_video(url):
         print(Fore.RED + f"An error occurred: {e}")
 
 if __name__ == "__main__":
-    print(Fore.YELLOW + "Welcome to the YouTube Video Downloader!")
-    video_url = input(Fore.BLUE + "Enter the YouTube video URL: ")
-    download_video(video_url)
+    download_video()
